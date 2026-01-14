@@ -1,70 +1,140 @@
-# Getting Started with Create React App
+# Welcome to React Router!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, production-ready template for building full-stack React applications using React Router.
 
-## Available Scripts
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- 🚀 Server-side rendering
+- ⚡️ Hot Module Replacement (HMR)
+- 📦 Asset bundling and optimization
+- 🔄 Data loading and mutations
+- 🔒 TypeScript by default
+- 🎉 TailwindCSS for styling
+- 📖 [React Router docs](https://reactrouter.com/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Installation
 
-### `npm test`
+Install the dependencies:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm install
+```
 
-### `npm run build`
+### Environment Configuration
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Copy the environment template file and configure your environment variables:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+cp env.template .env
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Required environment variables:
 
-### `npm run eject`
+**Database Configuration (choose one):**
+- `DATABASE_URL` - MySQL connection string (e.g., `mysql://user:password@host:port/database`)
+- OR use individual parameters:
+  - `DB_HOST` - Database host (default: localhost)
+  - `DB_PORT` - Database port (default: 3306)
+  - `DB_USER` - Database user
+  - `DB_PASSWORD` - Database password
+  - `DB_NAME` - Database name
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**BetterAuth Configuration:**
+- `BETTER_AUTH_SECRET` - Secret key for BetterAuth (minimum 32 characters, change in production!)
+- `BETTER_AUTH_URL` - Base URL of your application (default: http://localhost:5173)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Other Services:**
+- `OPENAI_API_KEY` - Your OpenAI API key for product detection
+- `AWS_REGION` - AWS region (e.g., us-east-1)
+- `AWS_ACCESS_KEY_ID` - AWS access key for S3 uploads
+- `AWS_SECRET_ACCESS_KEY` - AWS secret key for S3 uploads
+- `AWS_S3_BUCKET_NAME` - S3 bucket name for storing product images
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Database Setup
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+BetterAuth will automatically create and manage the required authentication tables (`user`, `session`, `account`, `verification`) when you first run the application. No manual migration is needed for these tables.
 
-## Learn More
+For other tables (like `product_detection`), use MikroORM migrations:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm run migration:create
+npm run migration:up
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Development
 
-### Code Splitting
+Start the development server with HMR:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm run dev
+```
 
-### Analyzing the Bundle Size
+Your application will be available at `http://localhost:5173`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Building for Production
 
-### Making a Progressive Web App
+Create a production build:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+npm run build
+```
 
-### Advanced Configuration
+## Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Docker Deployment
 
-### Deployment
+To build and run using Docker:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```bash
+docker build -t my-app .
 
-### `npm run build` fails to minify
+# Run the container
+docker run -p 3000:3000 my-app
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The containerized application can be deployed to any platform that supports Docker, including:
+
+- AWS ECS
+- Google Cloud Run
+- Azure Container Apps
+- Digital Ocean App Platform
+- Fly.io
+- Railway
+
+### DIY Deployment
+
+If you're familiar with deploying Node applications, the built-in app server is production-ready.
+
+Make sure to deploy the output of `npm run build`
+
+```
+├── package.json
+├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
+├── build/
+│   ├── client/    # Static assets
+│   └── server/    # Server-side code
+```
+
+## Styling
+
+This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+
+---
+
+Built with ❤️ using React Router.
+
+aws ecr get-login-password --region us-east-1 --profile snaptosell | docker login --username AWS --password-stdin 726591791633.dkr.ecr.us-east-1.amazonaws.com && docker buildx build --platform linux/amd64 --provenance=false -t snaptosell/dev:latest --load . && docker tag snaptosell/dev:latest 726591791633.dkr.ecr.us-east-1.amazonaws.com/snaptosell/dev:latest && docker push 726591791633.dkr.ecr.us-east-1.amazonaws.com/snaptosell/dev:latest
+
+docker stop snaptosell-dev && docker rm snaptosell-dev && aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 726591791633.dkr.ecr.us-east-1.amazonaws.com && docker pull 726591791633.dkr.ecr.us-east-1.amazonaws.com/snaptosell/dev:latest && docker run -d -p 3000:3000 --restart always --name snaptosell-dev 726591791633.dkr.ecr.us-east-1.amazonaws.com/snaptosell/dev:latest
+
+docker rm snaptosell-dev
+
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 726591791633.dkr.ecr.us-east-1.amazonaws.com
+
+docker pull 726591791633.dkr.ecr.us-east-1.amazonaws.com/snaptosell/dev:latest
+
+docker run -d -p 3000:3000 --restart always --name snaptosell-dev 726591791633.dkr.ecr.us-east-1.amazonaws.com/snaptosell/dev:latest
