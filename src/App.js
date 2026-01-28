@@ -482,10 +482,11 @@ const SnapToSellLanding = () => {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="bg-gradient-to-br from-orange-500 to-orange-600 p-2 rounded-lg">
-                  <Shield className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-xl font-bold text-white">SnapToSell</span>
+                <img 
+                  src="/SnapToSell with S 90Deg Curved.jpg" 
+                  alt="SnapToSell Logo" 
+                  className="h-10 w-auto"
+                />
               </div>
               <p className="text-slate-400 text-sm">
                 The first marketplace platform that actually protects you from scams.
