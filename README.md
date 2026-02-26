@@ -54,6 +54,12 @@ Required environment variables:
 - `AWS_SECRET_ACCESS_KEY` - AWS secret key for S3 uploads
 - `AWS_S3_BUCKET_NAME` - S3 bucket name for storing product images
 
+**eBay Listing API (OAuth + Inventory, for Flutter app / create listing):**
+- `EBAY_CLIENT_ID` / `EBAY_CLIENT_SECRET` - Same as above; Sandbox keys for testing.
+- `EBAY_REDIRECT_URI` or `EBAY_RUNAME` - RuName string from eBay Developer Portal, or full callback URL (must match "Auth accepted URL" in eBay).
+- `EBAY_ENVIRONMENT` - `sandbox` or `production`.
+- `APP_OAUTH_REDIRECT` - Deep link after login (e.g. `snaptosell://oauth`). Set "Auth declined URL" in eBay to `https://your-site.com/api/oauth/ebay/declined`.
+
 ### Database Setup
 
 BetterAuth will automatically create and manage the required authentication tables (`user`, `session`, `account`, `verification`) when you first run the application. No manual migration is needed for these tables.
