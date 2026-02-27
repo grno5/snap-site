@@ -90,12 +90,18 @@ interface ProductData {
   condition_rating?: string;
 }
 
+const isSandbox =
+  (process.env.EBAY_ENVIRONMENT ?? "").toLowerCase() === "sandbox";
+const ebayApiHost = isSandbox
+  ? "https://api.sandbox.ebay.com"
+  : "https://api.ebay.com";
+
 export class EbayAPIService {
   private ebayToken: string = '';
   private tokenExpiresAt: number = 0;
-  private apiBaseUrl: string = "https://api.ebay.com/buy/browse/v1/item_summary/search";
-  private tokenEndpoint: string = "https://api.ebay.com/identity/v1/oauth2/token";
-  
+  private apiBaseUrl: string = `${ebayApiHost}/buy/browse/v1/item_summary/search`;
+  private tokenEndpoint: string = `${ebayApiHost}/identity/v1/oauth2/token`;
+
   // eBay Category IDs for devices only
   private validCategoryIds: Set<string> = new Set([
     '9355',      // Cell Phones & Smartphones
